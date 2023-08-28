@@ -1,8 +1,10 @@
+import { ExpectError } from './expect'
+import { reportStore } from './report'
+
 let defaultFixtures = {
   page: {
-    getByRole: async (role: string, options: { name: string}) => {
+    getByRole: (role: string, options: { name: string}) => {
       if (role === 'button') {
-        console.log("🚀 ~ options:", options)
         return document.querySelector(`button`)
       }
 
@@ -12,17 +14,30 @@ let defaultFixtures = {
 }
 
 function test (title: string, callbackFn: (fixtures: typeof defaultFixtures) => void): void {
-  console.log(title)
-  callbackFn(defaultFixtures)
-  console.log("----------------------------------")
+  try {
+    callbackFn(defaultFixtures)
+    reportStore.setSpec({
+      title,
+      ok: true
+    })
+  } catch(err) {
+    if (err instanceof ExpectError) {
+      reportStore.setSpec({
+        title,
+        ok: false,
+        error: {
+          expected: err.expected,
+          received: err.received,
+        }
+      })
+    }
+  }
 }
 
 test.describe = (title: string, callbackFn: () => void): void => {
-  console.log('=================================')
-  console.log(title)
-  console.log('=================================')
-  
+  reportStore.setSuite(title)
   callbackFn()
+  reportStore.increaseSuiteIndex()
 }
 
 export { test }

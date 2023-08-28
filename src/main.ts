@@ -1,6 +1,7 @@
 import { expect, test } from './super-test-in-the-world'
 
 import { cal } from './lib/calculator'
+import { reportStore } from './super-test-in-the-world/report'
 
 test.describe("Calculator", () => {
   test('Verify "Add" function', () => {
@@ -8,14 +9,14 @@ test.describe("Calculator", () => {
     expect(result).toEqual(10)
   })
 
-  test('Verify "subtract" function', async () => {
+  test('Verify "subtract" function', () => {
     const result = cal(5).subtract(5).value()
     expect(result).toEqual(0)
   })
 
-  test('Verify "multiply" function', async () => {
+  test('Verify "multiply" function', () => {
     const result = cal(5).multiply(5).value()
-    expect(result).toEqual(25)
+    expect(result).toEqual(234234)
   })
 
   test('Verify "divide" function', () => {
@@ -28,3 +29,17 @@ test.describe("Calculator", () => {
     expect(result).toEqual(4)
   })
 })
+
+test.describe("Calculator2", () => {
+  test('Verify "Add" function', () => {
+    const result = cal(5).add(5).value()
+    expect(result).toEqual(10)
+  })
+
+  test('Verify "subtract" function', () => {
+    const result = cal(5).subtract(5).value()
+    expect(result).toEqual(0)
+  })
+})
+
+reportStore.printReport()

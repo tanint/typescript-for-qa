@@ -32,4 +32,4 @@ export const cal = (initialValue: number) => {
     divide,
     value
   }
-};
+}
