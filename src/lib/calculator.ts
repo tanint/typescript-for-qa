@@ -1,16 +1,35 @@
-export const createCalculator = () => {
+export const cal = (initialValue: number) => {
+  let result = initialValue
+
+  const add = (value: number) => {
+    result = result + value
+    return cal(result)
+  }
+
+  const subtract = (value: number) => {
+    result = result - value
+    return cal(result)
+  }
+
+  const multiply = (value: number) => {
+    result = result * value
+    return cal(result)
+  }
+
+  const divide = (value: number) => {
+    result = result / value
+    return cal(result)
+  }
+
+  const value = () => {
+    return result
+  }
+
   return {
-    add: (a: number, b: number): number => {
-      return a + b;
-    },
-    subtract: (a: number, b: number): number => {
-      return a - b;
-    },
-    multiply: (a: number, b: number): number => {
-      return a * b;
-    },
-    divide: (a: number, b: number): number => {
-      return a / b;
-    }
-  };
+    add,
+    subtract,
+    multiply,
+    divide,
+    value
+  }
 };

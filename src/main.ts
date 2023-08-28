@@ -1,29 +1,30 @@
 import { expect, test } from './super-test-in-the-world'
 
-import { createCalculator } from './lib/calculator'
+import { cal } from './lib/calculator'
 
 test.describe("Calculator", () => {
   test('Verify "Add" function', () => {
-    const cal = createCalculator()
-    
-    expect(cal.add(5, 5)).toEqual(10)
+    const result = cal(5).add(5).value()
+    expect(result).toEqual(10)
   })
 
   test('Verify "subtract" function', async () => {
-    const cal = createCalculator()
-
-    expect(cal.subtract(5, 5)).toEqual(0)
+    const result = cal(5).subtract(5).value()
+    expect(result).toEqual(0)
   })
 
   test('Verify "multiply" function', async () => {
-    const cal = createCalculator()
-
-    expect(cal.multiply(5, 1)).toEqual(25)
+    const result = cal(5).multiply(5).value()
+    expect(result).toEqual(25)
   })
 
-  test('Verify "divide" function', async () => {
-    const cal = createCalculator()
+  test('Verify "divide" function', () => {
+    const result = cal(10).divide(2).value()
+    expect(result).toEqual(5)
+  })
 
-    expect(cal.divide(10, 2)).toEqual(5)
+  test('Can chain calculating', () => {
+    const result = cal(10).subtract(2).add(8).multiply(2).divide(8).value()
+    expect(result).toEqual(4)
   })
 })
