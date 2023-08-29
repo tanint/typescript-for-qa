@@ -19,7 +19,7 @@
 ### Alias Types and Union Types
 
 - Introduction to type aliases for custom type names.
-- Explaining union types for variables that can hold different types.
+- Explaining union/intersection types for variables that can hold different types.
 
 ### Functions in TypeScript
 
